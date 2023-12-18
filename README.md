@@ -22,16 +22,7 @@ python main.py
 
 ## Note 
 
-You can make your own level in easly with settings file.
+You can make your own level go to settings file and edit `level_dic`.
+Make sure your map size 22x14.
 
-### Step One
-
-Make new level use  'x','X' horizontal lazer, 'ı','I' vertical laser,'P' player and '0' wall. (you can check oder level and make it easly)
-
-`new_level = []`
-
-### Step Two
-
-Add the new level to 'level_dic' with next number four or clear all level and make your game.
-
-`level_dic = {1:level_one,2:level_two,3:level_three,4:new_level}`
+`level_dic = {1:...}`
