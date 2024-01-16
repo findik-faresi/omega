@@ -51,8 +51,8 @@ class Player(pygame.sprite.Sprite):
         self.direction.y += self.gravity
         self.rect.y += self.direction.y  
 
-    def verticall_movement(self,tile,laser):
-        for sprite in tile.sprites():
+    def vertical_movement(self,sprite_group):
+        for sprite in sprite_group.sprites():
             if self.rect.colliderect(sprite.rect):
                 if self.rect.y < sprite.rect.y:
                     self.direction.y = 0
@@ -63,30 +63,16 @@ class Player(pygame.sprite.Sprite):
                     self.direction.y = 0
                     self.rect.top = sprite.rect.bottom
 
-        for sprite in laser.sprites():
-            if self.rect.colliderect(sprite.rect):
-                if self.rect.y < sprite.rect.y:
-                    self.direction.y = 0
-                    self.rect.bottom = sprite.rect.top
-                    self.on_floor = True 
-                if self.rect.y > sprite.rect.y:
-                    self.direction.y = 0
-                    self.rect.top = sprite.rect.bottom
-
+    def vectical_movement_controll(self,laser,tile):
+        self.vertical_movement(laser)
+        self.vertical_movement(tile)
         self.animation()
 
         if self.on_floor and self.direction.y != 0:
             self.on_floor = False
 
-    def horizontall_movement(self,tile,laser):
-        for sprite in tile.sprites():
-            if self.rect.colliderect(sprite.rect):
-                if self.direction.x > 0:
-                    self.rect.right = sprite.rect.left
-                if self.direction.x < 0:
-                    self.rect.left = sprite.rect.right
-
-        for sprite in laser.sprites():
+    def horizontall_movement(self,sprite_group):
+        for sprite in sprite_group.sprites():
             if self.rect.colliderect(sprite.rect):
                 if self.direction.x > 0:
                     self.rect.right = sprite.rect.left
@@ -111,8 +97,9 @@ class Player(pygame.sprite.Sprite):
         self.input()
         if self.rect.x > -1 or self.direction.x == 1:
             self.rect.x += self.direction.x * self.speed 
-        self.horizontall_movement(tile,laser) 
+        self.horizontall_movement(tile)
+        self.horizontall_movement(laser)
         self.apply_gravity()
-        self.verticall_movement(tile,laser)
+        self.vectical_movement_controll(laser,tile)
         self.touch_laser(laser)
         self.level_up()
