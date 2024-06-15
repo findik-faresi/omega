@@ -18,7 +18,7 @@ To play Omega, you'll need the following installed on your system:
 Open a terminal or command prompt and navigate to your desired directory. Use the following command to clone the Omega game repository from GitHub:
 
 ```sh
-git clone https://github.com/ulysses-o/omega
+git clone https://github.com/findik-faresi/omega
 ```
 
 This will download the game's source code to a folder named "omega" in your current directory.
